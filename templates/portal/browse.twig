@@ -1,0 +1,140 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <div class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <div class="wrapper">
+            {% include '/partial/topbar.twig' %}
+            {% include '/partial/sidebar.twig' %}
+
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>{{ group|title }}s</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">{{ group }}</li>
+                        </ol>
+                    </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">{{ root ~ page_title }}</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in contents %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td>{{ item.basename }}</td>
+                                            <td></td>
+                                            <td>
+                                                {% if item.type == 'dir' %}
+                                                    <a href="/source?what={{ group}}&path={{ item.path }}" class="table-action-button" data-toggle="tooltip" data-placement="bottom" title="Open Folder">
+                                                        <i class="far fa-folder-open"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <a href="/source/show?what={{ group }}&path={{ item.path }}" class="table-action-button" data-toggle="tooltip" data-placement="bottom" title="Open File">
+                                                        <i class="far fa-file-alt"></i>
+                                                    </a>
+                                                {% endif %}
+                                                <a href="#" class="table-action-button" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="far fa-trash-alt"></i></a>
+                                                <a href="#" class="table-action-button" data-toggle="tooltip" data-placement="bottom" title="Lock or Unlock"><i class="fas fa-lock-open"></i><a href="#">
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                    Footer
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+
+                </section>
+                <!-- /.content -->
+            </div>
+        </div>
+        <div class="btn-group-fab" role="group" aria-label="Create New File">
+            <div>
+                <span data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-main btn-primary has-tooltip" data-toggle="tooltip" data-placement="left" title="Create New File"> 
+                        <i class="fa fa-file"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCreateNewSource" action="/source/create" method="POST">
+                        <input type="hidden" id="what" name="what" value="{{ group }}">
+                        <input type="hidden" id="root" name="root" value="{{ root }}">
+                        <div class="form-group">
+                            <label for="path">Path</label>
+                            <small id="filename" class="form-text text-muted">{{ root }} ...</small>
+                            <input type="text" id="path" name="path" class="form-control" value="{{ page_title }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="filename">Name</label>
+                            <input type="text" class="form-control" id="filename" name="filename" placeholder="Sample">
+                            <small id="filename" class="form-text text-muted">SampleController.php</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="_create()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function _create() {
+            $('#formCreateNewSource').submit();
+        }
+    </script>
+{% endblock %}

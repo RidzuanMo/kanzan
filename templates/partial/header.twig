@@ -1,0 +1,19 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>{{ title() }}</title>
+
+{% for css in style_load() %}
+  <link rel="stylesheet" href="{{ css.href }}" integrity="{{ css.integrity}}" crossorigin="{{ css.crossorigin }}">
+{% endfor %}
+
+<link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/css/adminlte.min.css">
+<link rel="stylesheet" href="/css/main.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">

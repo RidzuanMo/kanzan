@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include '/partial/header.twig' %}
+    {% block header_optional %}{% endblock %}
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+
+    {% for js in script_load('post') %}
+      <script src="{{ js.src }}" integrity="{{ js.integrity }}" crossorigin="{{ js.crossorigin }}"></script>
+    {% endfor %}
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/adminlte.min.js"></script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+  </body>
+</html>

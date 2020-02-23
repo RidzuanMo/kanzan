@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+class {{ name }} extends BaseController
+{
+    public function index(ServerRequestInterface $request) : ResponseInterface
+    {
+        $response = new \Laminas\Diactoros\Response;
+        $response->getBody()->write("Hello World...");
+        return $response;
+    }
+}

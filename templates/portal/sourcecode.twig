@@ -1,0 +1,86 @@
+{% extends "base.twig" %}
+
+{% block header_optional %}
+    <link rel="stylesheet" href="/plugins/codemirror/lib/codemirror.css">
+    <script src="/plugins/codemirror/lib/codemirror.js"></script>
+    <script src="/plugins/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="/plugins/codemirror/mode/xml/xml.js"></script>
+    <script src="/plugins/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/plugins/codemirror/mode/css/css.js"></script>
+    <script src="/plugins/codemirror/mode/clike/clike.js"></script>
+    <script src="/plugins/codemirror/mode/php/php.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <div class="wrapper">
+            {% include '/partial/topbar.twig' %}
+            {% include '/partial/sidebar.twig' %}
+
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>{{ page_title }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">{{ page_title }}</li>
+                        </ol>
+                    </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">{{ filename }}</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <textarea id="code" name="code">{{ contents }}</textarea>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                    Footer
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+
+                </section>
+                <!-- /.content -->
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group-fab" role="group" aria-label="FAB Menu">
+        <div>
+            <button type="button" class="btn btn-main btn-primary has-tooltip" data-toggle="tooltip" data-placement="left" title="Save"> <i class="fa fa-save"></i> </button>
+        </div>
+    </div>
+
+    <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "application/x-httpd-php",
+        indentUnit: 4,
+        indentWithTabs: true
+      });
+    </script>
+{% endblock %}
