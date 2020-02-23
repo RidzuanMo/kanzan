@@ -1,0 +1,25 @@
+{
+    "name": "ridzuanmo/kanzan",
+    "description": "Rapid Software Development Framework",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ridzuan Mohamad",
+            "email": "ridzuanmo@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kanzan\\": "kanzan/",
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "league/route": "^4.3",
+        "laminas/laminas-diactoros": "^2.2",
+        "laminas/laminas-httphandlerrunner": "^1.1",
+        "twig/twig": "^3.0",
+        "monolog/monolog": "^2.0",
+        "league/flysystem": "^1.0"
+    }
+}
