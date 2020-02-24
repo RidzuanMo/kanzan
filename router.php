@@ -8,3 +8,4 @@ $router->map('POST', '/home', 'Kanzan\Controllers\PortalController::home')->setN
 $router->map('GET', '/source', 'Kanzan\Controllers\SourceCodeController::index')->setName('source.browse');
 $router->map('GET', '/source/show', 'Kanzan\Controllers\SourceCodeController::show')->setName('source.show');
 $router->map('POST', '/source/create', 'Kanzan\Controllers\SourceCodeController::create')->setName('source.create');
+$router->map('POST', '/source/update', 'Kanzan\Controllers\SourceCodeController::update')->setName('source.update');
