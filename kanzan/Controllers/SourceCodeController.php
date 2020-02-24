@@ -23,7 +23,7 @@ class SourceCodeController extends BaseController
         $path = $request->getQueryParams()["path"];
 
         $contents = $this->browse($what, $path, false);
-        
+        $this->log($this::LOG_LEVEL_INFO, "browse", [$contents]);
         $args = [
             "group" => $what,
             "root" => $this::AVAILABLE_NAMESPACE[$what],
@@ -69,9 +69,7 @@ class SourceCodeController extends BaseController
 
         $this->writeOrUpdate($what, $path . "/" . $filename . "php", $content);
 
-        $response = new \Laminas\Diactoros\Response;
-        $response->getBody()->write("Hello World...");
-        return $response;
+        return $this->redirect("/source?what=" . $what . "&path=" . $path);
     }
 
     public function update(ServerRequestInterface $request) : ResponseInterface

@@ -79,7 +79,7 @@ class BaseController {
 
     public function redirect($path)
     {
-        return $path;
+        return new \Laminas\Diactoros\Response\RedirectResponse($path);
     }
 
     public function log($level, $message, $context)
