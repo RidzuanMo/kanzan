@@ -1,7 +1,7 @@
 # kanzan
 Rapid Software Development Framework
 
-## Initiated
+## Initiate Project
 1. Download or Clone
 2. execute `composer update`
 
