@@ -23,7 +23,7 @@ class SourceCodeController extends BaseController
         $path = $request->getQueryParams()["path"];
 
         $contents = $this->browse($what, $path, false);
-        $this->log($this::LOG_LEVEL_INFO, "browse", [$contents]);
+        
         $args = [
             "group" => $what,
             "root" => $this::AVAILABLE_NAMESPACE[$what],
@@ -40,12 +40,12 @@ class SourceCodeController extends BaseController
     {
         $what = $request->getQueryParams()["what"];
         $file = $request->getQueryParams()["path"];
-
+        
         $contents = $this->openFile($what, $file);
 
         $args = [
             "group" => $what,
-            "page_title" => $what,
+            "path" => $file,
             "filename" => end(explode("/", $file)),
             "contents" => $contents
         ];
@@ -67,16 +67,21 @@ class SourceCodeController extends BaseController
             "name" => $filename
         ]);
 
-        $this->writeOrUpdate($what, $path . "/" . $filename . "php", $content);
+        $this->writeOrUpdate($what, $path . "/" . $filename . ".php", $content);
 
         return $this->redirect("/source?what=" . $what . "&path=" . $path);
     }
 
     public function update(ServerRequestInterface $request) : ResponseInterface
     {
-        $response = new \Laminas\Diactoros\Response;
-        $response->getBody()->write("Hello World...");
-        return $response;
+        $this->log($this::LOG_LEVEL_INFO, "update file", $request->getParsedBody());
+        $what = $request->getParsedBody()["group"];
+        $path = $request->getParsedBody()["path"];
+        $content = $request->getParsedBody()["content"];
+
+        $this->writeOrUpdate($what, $path, $content);
+
+        return $this->redirect("/source/show?what=" . $what ."&path=" . $path);
     }
 
     public function delete(ServerRequestInterface $request) : ResponseInterface
