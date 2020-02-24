@@ -82,7 +82,7 @@ class BaseController {
         return new \Laminas\Diactoros\Response\RedirectResponse($path);
     }
 
-    public function log($level, $message, $context)
+    public function log($level, $message, $context = [])
     {
         $this->container['logger']->$level($message, $context);
     }
