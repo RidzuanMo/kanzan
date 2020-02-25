@@ -15,6 +15,15 @@ $:/> touch .gitignore
 ```
 3. Copy & Paste default `.gitignore`
 ```
+# Project Generated Files #
+###########################
+app/Controllers/*
+!app/Controllers/SampleController.php
+app/Models/*
+!app/Models/Sample.php
+app/Modules/*
+!app/Modules/SampleModule.php
+
 # Composer Package #
 ####################
 vendor/
