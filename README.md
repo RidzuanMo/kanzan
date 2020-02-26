@@ -5,12 +5,6 @@ Rapid Software Development Framework
 1. Download or Clone
 2. Setting .gitignore
 ```
-$:/> git rm --cache composer.lock
-$:/> git rm -r --cache app/Controllers
-$:/> git rm -r --cache app/Models
-$:/> git rm -r --cache app/Modules
-$:/> git rm -r --cache logs
-
 $:/> touch .gitignore
 ```
 3. Copy & Paste default `.gitignore`
@@ -23,6 +17,8 @@ app/Models/*
 !app/Models/Sample.php
 app/Modules/*
 !app/Modules/SampleModule.php
+templates/app/*
+!templates/app/sample.twig
 
 # Composer Package #
 ####################
