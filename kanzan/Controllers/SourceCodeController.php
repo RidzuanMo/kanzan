@@ -10,6 +10,8 @@ class SourceCodeController extends BaseController
     private const VIEW_BROWSE = '/portal/browse.twig';
     private const VIEW_SOURCE = '/portal/sourcecode.twig';
     private const TEMPLATE_CONTROLLER = '/general/controller.twig';
+    private const TEMPLATE_MODEL = '/general/model.twig';
+    private const TEMPLATE_MODULE = '/general/module.twig';
 
     private const AVAILABLE_NAMESPACE = [
         "controller" => "App/Controllers/",
@@ -21,7 +23,7 @@ class SourceCodeController extends BaseController
     {
         $what = $request->getQueryParams()["what"];
         $path = $request->getQueryParams()["path"];
-
+        
         $contents = $this->browse($what, $path, false);
         
         $args = [
@@ -62,7 +64,18 @@ class SourceCodeController extends BaseController
         $path = $request->getParsedBody()["path"];
         $filename = $request->getParsedBody()["filename"];
         
-        $content = $this->render($this::TEMPLATE_CONTROLLER, [
+        $template = $this::TEMPLATE_CONTROLLER;
+
+        if ($what == "model")
+        {
+            $template = $this::TEMPLATE_MODEL;
+        } 
+        elseif ($what == "module")
+        {
+            $template = $this::TEMPLATE_MODULE;
+        }
+
+        $content = $this->render($template, [
             "namespace" => str_replace("/" , "\\", $root . $path),
             "name" => $filename
         ]);
