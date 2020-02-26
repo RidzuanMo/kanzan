@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class PortalController extends BaseController
 {
-    private const VIEW_INDEX = '/portal/index.twig';
+    private const VIEW_INDEX = '/portal/login.twig';
     private const VIEW_HOME = '/portal/home.twig';
 
     public function index(ServerRequestInterface $request) : ResponseInterface

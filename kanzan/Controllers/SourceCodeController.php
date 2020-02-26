@@ -7,8 +7,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class SourceCodeController extends BaseController
 {
-    private const VIEW_BROWSE = '/portal/browse.twig';
-    private const VIEW_SOURCE = '/portal/sourcecode.twig';
+    private const VIEW_BROWSE = '/control_panel/browse.twig';
+    private const VIEW_SOURCE = '/control_panel/sourcecode.twig';
     private const TEMPLATE_CONTROLLER = '/general/controller.twig';
     private const TEMPLATE_MODEL = '/general/model.twig';
     private const TEMPLATE_MODULE = '/general/module.twig';
@@ -49,6 +49,7 @@ class SourceCodeController extends BaseController
             "group" => $what,
             "path" => $file,
             "filename" => end(explode("/", $file)),
+            "codetype" => "php",
             "contents" => $contents
         ];
 

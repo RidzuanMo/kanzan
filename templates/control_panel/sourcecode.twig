@@ -3,20 +3,24 @@
 {% block header_optional %}
     <link rel="stylesheet" href="/plugins/codemirror/lib/codemirror.css">
     <script src="/plugins/codemirror/lib/codemirror.js"></script>
-    <script src="/plugins/codemirror/addon/edit/matchbrackets.js"></script>
-    <script src="/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
-    <script src="/plugins/codemirror/mode/xml/xml.js"></script>
-    <script src="/plugins/codemirror/mode/javascript/javascript.js"></script>
-    <script src="/plugins/codemirror/mode/css/css.js"></script>
-    <script src="/plugins/codemirror/mode/clike/clike.js"></script>
-    <script src="/plugins/codemirror/mode/php/php.js"></script>
+    {% if codetype == 'php' %}
+        <script src="/plugins/codemirror/addon/edit/matchbrackets.js"></script>
+        <script src="/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+        <script src="/plugins/codemirror/mode/xml/xml.js"></script>
+        <script src="/plugins/codemirror/mode/javascript/javascript.js"></script>
+        <script src="/plugins/codemirror/mode/css/css.js"></script>
+        <script src="/plugins/codemirror/mode/clike/clike.js"></script>
+        <script src="/plugins/codemirror/mode/php/php.js"></script>
+    {% else %}
+        <script src="/plugins/codemirror/mode/twig/twig.js"></script>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
         <div class="wrapper">
             {% include '/partial/topbar.twig' %}
-            {% include '/partial/sidebar.twig' %}
+            {% include '/partial/sidebar_control_panel.twig' %}
 
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -80,7 +84,11 @@
         var editor = CodeMirror.fromTextArea(document.getElementById("content"), {
             lineNumbers: true,
             matchBrackets: true,
-            mode: "application/x-httpd-php",
+            {% if codetype == 'php' %}
+                mode: "application/x-httpd-php",
+            {% else %}
+                mode: {name: "twig", htmlMode: true},
+            {% endif %}
             indentUnit: 4,
             indentWithTabs: true
         });

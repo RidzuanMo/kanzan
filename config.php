@@ -19,6 +19,12 @@ return [
         ],
         "module" => [
             "path" => __DIR__ . "/app/Modules"
+        ],
+        "portal" => [
+            "path" => __DIR__ . "/templates/portal"
+        ],
+        "application" => [
+            "path" => __DIR__ . "/templates/app"
         ]
     ],
     "view" => [
