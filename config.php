@@ -6,9 +6,7 @@ return [
     "style" => [],
     "script" => [
         "pre" => [],
-        "post" => [
-            
-        ]
+        "post" => []
     ],
     "sourcecode" => [
         "controller" => [
