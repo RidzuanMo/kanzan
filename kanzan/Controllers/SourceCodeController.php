@@ -25,7 +25,7 @@ class SourceCodeController extends BaseController
         $path = $request->getQueryParams()["path"];
         
         $contents = $this->browse($what, $path, false);
-        
+
         $args = [
             "group" => $what,
             "root" => $this::AVAILABLE_NAMESPACE[$what],
