@@ -22,6 +22,14 @@ class BaseController {
         $this->container = Application::getContainer();
     }
 
+    protected function path_for($alias)
+    {
+        $route = \Kanzan\Models\Route::where('alias', $alias)->first();
+        $path = $route->path;
+
+        return $path;
+    }
+
     protected function getTopbarMenu()
     {
         $topbar = \Kanzan\Models\Route::where('category', 'TOPBAR')->get();

@@ -1,0 +1,114 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <div class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <div class="wrapper">
+            {% include '/partial/topbar.twig' %}
+            {% include '/partial/sidebar_control_panel.twig' %}
+
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Router</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Router</li>
+                        </ol>
+                    </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">Register New Router</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{{ path_for('controlpanel.router.create') }}" id="_form" name="_form">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="method" >Method</label>
+                                        <select class="custom-select" id="method" name="method">
+                                            <option value="GET">GET</option>
+                                            <option value="POST">POST</option>
+                                            <option value="PUT">PUT</option>
+                                            <option value="DELETE">DELETE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="path">Path</label>
+                                        <input type="text" class="form-control" id="path" name="path" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="alias">Alias</label>
+                                        <input type="text" class="form-control" id="alias" name="alias">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="controller">Controller</label>
+                                        <input type="text" class="form-control" id="controller" name="controller">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="function">Function</label>
+                                        <input type="text" class="form-control" id="function" name="function">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                    Footer
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+
+                </section>
+                <!-- /.content -->
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group-fab" role="group" aria-label="FAB Menu">
+        <div>
+            <button type="button" onclick="_create()" class="btn btn-main btn-primary has-tooltip" data-toggle="tooltip" data-placement="left" title="Save"> <i class="fa fa-save"></i> </button>
+        </div>
+    </div>
+
+    <script>
+        function _create() {
+            $('#_form').submit();
+        }
+    </script>
+{% endblock %}
