@@ -11,8 +11,14 @@ class ControlPanelController extends BaseController
 
     public function index(ServerRequestInterface $request) : ResponseInterface
     {
+        $topbar = $this->getTopbarMenu();
+        
+        $args = [
+            "topbar" => $topbar
+        ];
+
         $response = new \Laminas\Diactoros\Response;
-        $response->getBody()->write($this->render(self::VIEW_INDEX));
+        $response->getBody()->write($this->render(self::VIEW_INDEX, $args));
         return $response;
     }
 }

@@ -11,10 +11,33 @@ Application::bind(require 'config.php');
 
 date_default_timezone_set(Application::get('timezone'));
 
+$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule->addConnection(Application::get("database")['default']);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
+//pass the connection to global container (created in previous article)
+Application::set("db", function () use ($capsule){
+   return $capsule;
+});
+
 $loader = new \Twig\Loader\FilesystemLoader(Application::get('view')['template']);
 $twig = new \Twig\Environment($loader, [
     'cache' => Application::get('view')['cache'],
 ]);
+
+$path_for = new \Twig\TwigFunction('path_for', function ($alias) {
+    $route = \Kanzan\Models\Route::where('alias', $alias)->first();
+    $path = $route->path;
+
+    if ($route->parameter != "")
+    {
+        $path = $path . '?' . $route->parameter;
+    }
+
+    return $path;
+});
+$twig->addFunction($path_for);
 
 $style_load = new \Twig\TwigFunction('style_load', function () {
     return Application::get('style');

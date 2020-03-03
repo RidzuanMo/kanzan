@@ -8,7 +8,21 @@ return [
         "pre" => [],
         "post" => []
     ],
+    "database" => [
+        "default" => [
+            "driver" => "mysql",
+            "host" => "127.0.0.1",
+            "database" => "kanzandb",
+            "username" => "admin",
+            "password" => "xs2admin",
+            "charset" => "utf8",
+            "collation" => "utf8_unicode_ci"
+        ]
+    ],
     "sourcecode" => [
+        "config" => [
+            "path" => __DIR__
+        ],
         "controller" => [
             "path" => __DIR__ . "/app/Controllers"
         ],
@@ -23,10 +37,16 @@ return [
         ],
         "application" => [
             "path" => __DIR__ . "/templates/app"
-        ]
+        ],
+		"migration" => [
+			"path" => __DIR__ . "/db/migrations"
+		],
+		"seed" => [
+			"path" => __DIR__ . "/db/seeds"
+		]
     ],
     "view" => [
-        "template" => __DIR__ . '/templates',
+        "template" => __DIR__ . "/templates",
         "cache" => false
     ],
     "logger" => [

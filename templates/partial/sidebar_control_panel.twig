@@ -27,18 +27,13 @@
           <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
-              </p>
+              <p>Router</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{ path_for('source.show') ~ '?what=config&path=config.php' }}" class="nav-link">
               <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
+              <p>Config</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
@@ -51,19 +46,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/source?what=controller" class="nav-link">
+                <a href="{{ path_for('source.list') ~ '?what=controller' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Controller</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/source?what=model" class="nav-link">
+                <a href="{{ path_for('source.list') ~ '?what=model' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Model</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/source?what=module" class="nav-link">
+                <a href="{{ path_for('source.list') ~ '?what=module' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Module</p>
                 </a>
@@ -80,13 +75,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/control-panel/ui/portal/login" class="nav-link">
+                <a href="{{ path_for('controlpanel.ui.portal.login') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Login</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/control-panel/ui/app" class="nav-link">
+                <a href="{{ path_for('controlpanel.ui.app') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Application</p>
                 </a>
@@ -97,81 +92,21 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                Extras
+                Database
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/login.html" class="nav-link">
+                <a href="{{ path_for('source.list') }}?what=migration" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Login</p>
+                  <p>Migrations</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/register.html" class="nav-link">
+                <a href="{{ path_for('source.list') }}?what=seed" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Register</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/forgot-password.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Forgot Password</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/recover-password.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Recover Password</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/lockscreen.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lockscreen</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/legacy-user-menu.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Legacy User Menu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/language-menu.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Language Menu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/404.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Error 404</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/500.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Error 500</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/pace.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pace</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/blank.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Blank Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="starter.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Starter Page</p>
+                  <p>Seeds</p>
                 </a>
               </li>
             </ul>

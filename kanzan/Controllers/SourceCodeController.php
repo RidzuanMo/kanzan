@@ -16,7 +16,9 @@ class SourceCodeController extends BaseController
     private const AVAILABLE_NAMESPACE = [
         "controller" => "App/Controllers/",
         "model" => "App/Models/",
-        "module" => "App/Modules/"
+        "module" => "App/Modules/",
+        "migration" => "Migrations",
+        "seed" => "Seeds"
     ];
 
     public function index(ServerRequestInterface $request) : ResponseInterface
@@ -27,6 +29,7 @@ class SourceCodeController extends BaseController
         $contents = $this->browse($what, $path, false);
 
         $args = [
+            "topbar" => $this->getTopbarMenu(),
             "group" => $what,
             "root" => $this::AVAILABLE_NAMESPACE[$what],
             "page_title" =>  $path,
@@ -46,6 +49,7 @@ class SourceCodeController extends BaseController
         $contents = $this->openFile($what, $file);
 
         $args = [
+            "topbar" => $this->getTopbarMenu(),
             "group" => $what,
             "path" => $file,
             "filename" => end(explode("/", $file)),
@@ -88,7 +92,7 @@ class SourceCodeController extends BaseController
 
     public function update(ServerRequestInterface $request) : ResponseInterface
     {
-        $this->log($this::LOG_LEVEL_INFO, "update file", $request->getParsedBody());
+        $this->logger($this::LOG_LEVEL_INFO, "update file", $request->getParsedBody());
         $what = $request->getParsedBody()["group"];
         $path = $request->getParsedBody()["path"];
         $content = $request->getParsedBody()["content"];

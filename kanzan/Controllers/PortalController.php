@@ -20,8 +20,14 @@ class PortalController extends BaseController
 
     public function home(ServerRequestInterface $request) : ResponseInterface
     {
+        $topbar = $this->getTopbarMenu();
+        
+        $args = [
+            "topbar" => $topbar
+        ];
+
         $response = new \Laminas\Diactoros\Response;
-        $response->getBody()->write($this->render(self::VIEW_HOME));
+        $response->getBody()->write($this->render(self::VIEW_HOME, $args));
         return $response;
     }
 

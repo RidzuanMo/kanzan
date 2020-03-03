@@ -22,6 +22,12 @@ class BaseController {
         $this->container = Application::getContainer();
     }
 
+    protected function getTopbarMenu()
+    {
+        $topbar = \Kanzan\Models\Route::where('category', 'TOPBAR')->get();
+        return $topbar;
+    }
+
     public function getFilesystem($what)
     {
         $folder = $this->container["sourcecode"][$what]["path"];
