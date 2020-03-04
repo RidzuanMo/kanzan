@@ -3,14 +3,28 @@
 namespace kanzan;
 
 use Exception;
+use Noodlehaus\Config;
+use Noodlehaus\Parser\Yaml;
 
 class Application
 {
     protected static $container = [];
 
+    public static function getRoot()
+    {
+        return __DIR__ . '/../';
+    }
+
+    public static function isEmpty()
+    {
+        return empty(self::$container);
+    }
+
     public static function bind($file)
     {
-        self::$container = $file;
+        $_config = new Config($file, new Yaml);
+        //var_dump($_config->all()); die();
+        self::$container = $_config->all();
     }
 
     public static function getContainer()

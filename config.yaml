@@ -1,0 +1,29 @@
+title: Kanzan
+timezone: Asia/Kuala_Lumpur
+
+database:
+  default:
+    driver: mysql
+    host: 127.0.0.1
+    database: kanzandb
+    username: admin
+    password: xs2admin
+    charset: utf8
+    collation: utf8_unicode_ci
+
+view:
+  template: /templates
+  cache: false
+
+logger:
+  level: DEBUG
+  path: /logs/event
+
+source:
+  controller: /app/Controllers
+  model: /app/Models
+  module: /app/Modules
+  portal: /templates/portal
+  application: /templates/app
+  migration: /db/migrations
+  seed: /db/seeds

@@ -16,10 +16,12 @@ class BaseController {
     protected const LOG_LEVEL_EMERGENCY = 'emergency';
 
     protected $container;
+    protected $root_folder;
 
     public function __construct()
     {
         $this->container = Application::getContainer();
+        $this->root_folder = Application::getRoot();
     }
 
     protected function path_for($alias)
@@ -38,7 +40,7 @@ class BaseController {
 
     public function getFilesystem($what)
     {
-        $folder = $this->container["sourcecode"][$what]["path"];
+        $folder = $this->root_folder . $this->container["source"][$what];
         
         $adapter = new Local($folder);
         $filesystem = new Filesystem($adapter);

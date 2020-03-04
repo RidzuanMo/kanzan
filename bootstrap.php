@@ -7,7 +7,10 @@ use Monolog\Handler\StreamHandler;
 
 require __DIR__ . '/vendor/autoload.php';
 
-Application::bind(require 'config.php');
+if (Application::isEmpty())
+{
+    Application::bind( __DIR__ . '/config.yaml');
+}
 
 date_default_timezone_set(Application::get('timezone'));
 
@@ -21,7 +24,7 @@ Application::set("db", function () use ($capsule){
    return $capsule;
 });
 
-$loader = new \Twig\Loader\FilesystemLoader(Application::get('view')['template']);
+$loader = new \Twig\Loader\FilesystemLoader(Application::getRoot() . Application::get('view')['template']);
 $twig = new \Twig\Environment($loader, [
     'cache' => Application::get('view')['cache'],
 ]);
@@ -40,12 +43,12 @@ $path_for = new \Twig\TwigFunction('path_for', function ($alias) {
 $twig->addFunction($path_for);
 
 $style_load = new \Twig\TwigFunction('style_load', function () {
-    return Application::get('style');
+    //return Application::get('style');
 });
 $twig->addFunction($style_load);
 
 $script_load = new \Twig\TwigFunction('script_load', function ($when) {
-    return Application::get('script')[$when];
+    //return Application::get('script')[$when];
 });
 $twig->addFunction($script_load);
 
