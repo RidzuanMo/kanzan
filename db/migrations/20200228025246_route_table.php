@@ -33,17 +33,18 @@ class RouteTable extends AbstractMigration
     public function change()
     {
 		$users = $this->table('routes');
-    	$users->addColumn('method', 'string', ['limit' => 16])
+    	$users->addColumn('method', 'string', ['limit' => 16, 'default' => 'GET'])
       		->addColumn('path', 'string', ['limit' => 254])
-			->addColumn('parameter', 'string', ['limit' => 254])
+			->addColumn('parameter', 'string', ['limit' => 254, 'null' => true])
 			->addColumn('alias', 'string', ['limit' => 254])
       		->addColumn('caption', 'string', ['limit' => 254, 'null' => true])
-      		->addColumn('category', 'string', ['limit' => 64])
+      		->addColumn('category', 'string', ['limit' => 64, 'default' => 'HREF'])
       		->addColumn('parent', 'integer', ['null' => true])
       		->addColumn('sort_order', 'integer', ['default' => 1])
       		->addColumn('has_child', 'boolean', ['default' => false])
       		->addColumn('controller', 'string', ['limit' => 254])
       		->addColumn('function', 'string', ['limit' => 254])
+			->addColumn('user_defined', 'boolean', ['default' => true])
 			->addColumn('created_at', 'timestamp', ['default' => Literal::from('now()')])
       		->addColumn('updated_at', 'timestamp', ['null' => true])
       		->create();

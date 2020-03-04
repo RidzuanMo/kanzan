@@ -12,6 +12,7 @@ class SourceCodeController extends BaseController
     private const TEMPLATE_CONTROLLER = '/general/controller.twig';
     private const TEMPLATE_MODEL = '/general/model.twig';
     private const TEMPLATE_MODULE = '/general/module.twig';
+    private const TEMPLATE_PAGE = '/general/page.twig';
 
     private const AVAILABLE_NAMESPACE = [
         "controller" => "App/Controllers/",
@@ -70,6 +71,8 @@ class SourceCodeController extends BaseController
         $filename = $request->getParsedBody()["filename"];
         
         $template = $this::TEMPLATE_CONTROLLER;
+        $extension = ".php";
+        $where = $this->path_for('source.list', [ "what" => $what, "path" => $path]);
 
         if ($what == "model")
         {
@@ -79,27 +82,33 @@ class SourceCodeController extends BaseController
         {
             $template = $this::TEMPLATE_MODULE;
         }
+        elseif ($what == "application")
+        {
+            $template = $this::TEMPLATE_PAGE;
+            $extension = ".twig";
+            //$where = $this->path_for('controlpanel.ui.app');
+        }
 
         $content = $this->render($template, [
             "namespace" => str_replace("/" , "\\", $root . $path),
             "name" => $filename
         ]);
 
-        $this->writeOrUpdate($what, $path . "/" . $filename . ".php", $content);
+        $this->writeOrUpdate($what, $path . "/" . $filename . $extension, $content);
 
-        return $this->redirect("/source?what=" . $what . "&path=" . $path);
+        return $this->redirect($where);
     }
 
     public function update(ServerRequestInterface $request) : ResponseInterface
     {
-        $this->logger($this::LOG_LEVEL_INFO, "update file", $request->getParsedBody());
+        $this->logger($this::LOG_LEVEL_DEBUG, "SourceCodeController::update", $request->getParsedBody());
         $what = $request->getParsedBody()["group"];
         $path = $request->getParsedBody()["path"];
         $content = $request->getParsedBody()["content"];
 
         $this->writeOrUpdate($what, $path, $content);
 
-        return $this->redirect("/source/show?what=" . $what ."&path=" . $path);
+        return $this->redirect($this->path_for('source.show') . "?what=" . $what ."&path=" . $path);
     }
 
     public function delete(ServerRequestInterface $request) : ResponseInterface

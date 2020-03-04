@@ -21,6 +21,7 @@ class UserInterfaceController extends BaseController
         $contents = $this->browse($what, $path, false);
         
         $args = [
+            "topbar" => $this->getTopbarMenu(),
             "group" => $what,
             "root" => "app",
             "page_title" =>  $path,

@@ -24,10 +24,19 @@ class BaseController {
         $this->root_folder = Application::getRoot();
     }
 
-    protected function path_for($alias)
+    protected function path_for($alias, $args = [])
     {
         $route = \Kanzan\Models\Route::where('alias', $alias)->first();
         $path = $route->path;
+
+        if (!empty($args))
+        {
+            $path = $path . '?';
+            foreach ($args as $key => $value)
+            {
+                $path = $path . '&' . $key . '=' . $value;
+            }
+        }
 
         return $path;
     }

@@ -61,7 +61,10 @@ Application::set('view', $twig);
 
 $logger = new Logger(Application::get('title'));
 
-$logger->pushHandler(new StreamHandler(Application::get('logger')['path'], Application::get('logger')['level']));
+$logger->pushHandler(new StreamHandler(
+    Application::getRoot() . Application::get('logger')['path'], 
+    Application::get('logger')['level'])
+);
 $logger->pushHandler(new BrowserConsoleHandler(Application::get('logger')['level']));
 
 Application::set('logger', $logger);
