@@ -24,21 +24,32 @@ class BaseController {
         $this->root_folder = Application::getRoot();
     }
 
-    protected function path_for($alias, $args = [])
+    protected function generateUrlParameter($args)
     {
-        $route = \Kanzan\Models\Route::where('alias', $alias)->first();
-        $path = $route->path;
+        $params = "?";
 
         if (!empty($args))
         {
-            $path = $path . '?';
             foreach ($args as $key => $value)
             {
-                $path = $path . '&' . $key . '=' . $value;
+                $params = $params . $key . "=" . $value . "&";
             }
         }
+        else{
+            $params = "";
+        }
 
-        return $path;
+        return $params;
+    }
+
+    protected function path_for($alias, $args = [])
+    {
+        $route = \Kanzan\Models\Route::where('alias', $alias)->first();
+        
+        $path = $route->path;
+        $params = $this->generateUrlParameter($args);
+
+        return $path . $params;
     }
 
     protected function getTopbarMenu()

@@ -15,7 +15,7 @@ view:
   template: /templates
   cache: false
 
-logger:
+monolog:
   level: DEBUG
   path: /logs/event
 
